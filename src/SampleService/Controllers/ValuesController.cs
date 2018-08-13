@@ -11,6 +11,10 @@ namespace SampleService.Controllers
     public class ValuesController : ControllerBase
     {
         // GET api/values
+        /// <summary>
+        /// Get all the values.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
