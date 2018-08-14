@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleService", "SampleService\SampleService.csproj", "{5102025E-F3D7-4394-A3C4-A7C8931FF66B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowTriggerManagingService", "FlowTriggerManagingService\FlowTriggerManagingService.csproj", "{C3EF70B9-15B8-4157-BDC3-AA14AD75E0DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5102025E-F3D7-4394-A3C4-A7C8931FF66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5102025E-F3D7-4394-A3C4-A7C8931FF66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5102025E-F3D7-4394-A3C4-A7C8931FF66B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3EF70B9-15B8-4157-BDC3-AA14AD75E0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3EF70B9-15B8-4157-BDC3-AA14AD75E0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3EF70B9-15B8-4157-BDC3-AA14AD75E0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3EF70B9-15B8-4157-BDC3-AA14AD75E0DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

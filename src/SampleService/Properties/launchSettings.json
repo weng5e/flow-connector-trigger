@@ -11,7 +11,7 @@
   "profiles": {
     "SampleService": {
       "commandName": "Project",
-      "launchBrowser": true,
+      //"launchBrowser": true,
       "launchUrl": "api/values",
       "applicationUrl": "http://localhost:5000/",
       "environmentVariables": {
