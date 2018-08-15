@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SampleService.Controllers
+namespace FlowTriggerManagingService
 {
     /// <summary>
     /// This is the response generated from this service which will be sent to Flow connector.
