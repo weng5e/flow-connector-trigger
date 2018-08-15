@@ -1,0 +1,87 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "5eBasicFixedParameter",
+    "description": "A test connector that can pass fixed parameters using web hook trigger.",
+    "version": "1.0"
+  },
+  "host": "5e-dev.ngrok.io",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/tenant/{tenantId}/bot/{botId}/api/v1/FlowConnector": {
+      "x-ms-notification-content": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "parameter1": {
+              "type": "string",
+              "description": "parameter1"
+            },
+            "parameter2": {
+              "type": "string",
+              "description": "parameter2"
+            }
+          }
+        },
+        "description": "Webhook response"
+      },
+      "post": {
+        "responses": {},
+        "summary": "WebhookTriggerWithFixedPara",
+        "operationId": "WebhookTriggerWithFixedPara",
+        "description": "WebhookTriggerWithFixedPara",
+        "x-ms-trigger": "single",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "botId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hookId": {
+                  "type": "string",
+                  "description": "hookId",
+                  "title": "",
+                  "x-ms-visibility": ""
+                },
+                "callbackUrl": {
+                  "type": "string",
+                  "description": "callbackUrl",
+                  "x-ms-notification-url": true,
+                  "x-ms-visibility": "internal"
+                }
+              },
+              "required": [
+                "hookId"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}
