@@ -65,6 +65,7 @@ namespace SampleService.Controllers
                 }
                 var req = JsonConvert.SerializeObject(obj);
                 var res = await _client.PostAsync(callback, new StringContent(req, Encoding.UTF8, "application/json"));
+                return null;
             }
             return "No call back.";
         }
