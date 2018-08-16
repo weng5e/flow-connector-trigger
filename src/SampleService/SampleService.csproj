@@ -4,6 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <ApplicationInsightsResourceId>/subscriptions/7a5bbd1a-3578-42aa-ac51-6adf4700c352/resourcegroups/5e-flow-integration/providers/microsoft.insights/components/5e-flow-int</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/7a5bbd1a-3578-42aa-ac51-6adf4700c352/resourcegroups/5e-flow-integration/providers/microsoft.insights/components/5e-flow-int</ApplicationInsightsAnnotationResourceId>
+    <UserSecretsId>0ca15730-bdc1-48e1-9ca9-81a6bbf79a84</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,12 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FlowTriggerManagingService\FlowTriggerManagingService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
