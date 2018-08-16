@@ -13,40 +13,52 @@
   "consumes": [],
   "produces": [],
   "paths": {
+    "/api/v1/FlowConnector/hookId/{hookId}/schema": {
+      "get": {
+        "description": "Get the schema of the webhook response",
+        "summary": "Get the schema of the webhook response",
+        "operationId": "GetWebhookResponseSchema",
+        "parameters": [
+          {
+            "name": "hookId",
+            "type": "string",
+            "in": "path",
+            "description": "Select the webhook",
+            "required": true,
+            "x-ms-summary": "Select webhook"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
     "/api/v1/FlowConnector/hookId/{hookId}": {
       "x-ms-notification-content": {
         "schema": {
           "type": "object",
           "x-ms-dynamic-schema": {
-            "operationId": "GetListSchema",
+            "operationId": "GetWebhookResponseSchema",
             "parameters": {
-              "listID": {
-                "parameter": "listID-dynamic"
+              "hookId": {
+                "parameter": "hookId"
               }
             },
-            "value-path": "items"
+            "value-path": "properties"
           }
         },
-        // "schema": {
-        //   "type": "object",
-        //   "properties": {
-        //     "parameter1": {
-        //       "type": "string",
-        //       "description": "parameter1"
-        //     },
-        //     "parameter2": {
-        //       "type": "string",
-        //       "description": "parameter2"
-        //     }
-        //   }
-        // },
         "description": "Webhook response"
       },
       "post": {
         "responses": {},
-        "summary": "WebhookTriggerWithFixedPara",
-        "operationId": "WebhookTriggerWithFixedPara",
-        "description": "WebhookTriggerWithFixedPara",
+        "summary": "Webhook Trigger With Dynamic Parameters",
+        "operationId": "WebhookTriggerWithDynamicParameters",
+        "description": "Webhook Trigger With Dynamic Parameters",
         "x-ms-trigger": "single",
         "parameters": [
           {

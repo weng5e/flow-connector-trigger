@@ -7,12 +7,15 @@ namespace FlowTriggerManagingService
 {
     public interface ITriggerManagingService
     {
-        Task UpdateTriggerAsync(string hookId, Uri callbackUri);
+        Task UpdateCallbackAsync(string hookId, Uri callbackUri);
 
-        Task DeleteTriggerAsync(string hookId);
-
+        Task DeleteCallbackAsync(string hookId);
         Task<Uri> GetCallbackAsync(string hookId);
 
-        IEnumerable<FlowTriggerDataContract> ListAllTriggerAsync();
+        Task UpdatePropertiesAsync(string hookId, IEnumerable<string> properties);
+
+        Task<IEnumerable<string>> GetPropertiesAsync(string hookId);
+
+        IEnumerable<FlowTriggerDataContract> ListAllTriggersAsync();
     }
 }
