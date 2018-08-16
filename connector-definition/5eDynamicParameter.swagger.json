@@ -5,7 +5,7 @@
     "description": "A test connector that can pass fixed parameters using web hook trigger.",
     "version": "1.0"
   },
-  "host": "5e-dev.ngrok.io",
+  "host": "5e-flow-int.azurewebsites.net",
   "basePath": "/",
   "schemes": [
     "https"
