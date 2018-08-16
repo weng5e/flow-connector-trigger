@@ -9,12 +9,17 @@ namespace FlowTriggerManagingService
     {
         Task UpdateCallbackAsync(string hookId, Uri callbackUri);
 
+        Task UpdateApiKeyAsync(string hookId, string key);
+
         Task DeleteCallbackAsync(string hookId);
+
         Task<Uri> GetCallbackAsync(string hookId);
 
-        Task UpdatePropertiesAsync(string hookId, IEnumerable<string> properties);
+        Task UpdatePropertiesAsync(string hookId, string hookName, IEnumerable<string> properties);
 
         Task<IEnumerable<string>> GetPropertiesAsync(string hookId);
+
+        IEnumerable<FlowTriggerDataContractBase> ListHooksByKey(string key);
 
         IEnumerable<FlowTriggerDataContract> ListAllTriggersAsync();
     }

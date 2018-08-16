@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "5eAccessControl1",
+    "description": "An authenticated test connector that can pass fixed parameters using web hook trigger.",
+    "version": "1.0"
+  },
+  "host": "5e-dev.ngrok.io",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/api/v1/flowconnector/hookIds": {
+      "get": {
+        "description": "Get accessable hook IDs",
+        "summary": "Get accessable hook IDs",
+        "operationId": "GetAccessibleHookIDs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hookId": {
+                    "type": "string"
+                  },
+                  "hookName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "hookId",
+                  "hookName"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/FlowConnector/hookId/{hookId}/schema": {
+      "get": {
+        "description": "Get the schema of the webhook response",
+        "summary": "Get the schema of the webhook response",
+        "operationId": "GetWebhookResponseSchema",
+        "parameters": [
+          {
+            "name": "hookId",
+            "type": "string",
+            "in": "path",
+            "description": "Select the webhook",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/FlowConnector/hookId/{hookId}": {
+      "x-ms-notification-content": {
+        "schema": {
+          "type": "object",
+          "x-ms-dynamic-schema": {
+            "operationId": "GetWebhookResponseSchema",
+            "parameters": {
+              "hookId": {
+                "parameter": "hookId"
+              }
+            },
+            "value-path": "properties"
+          }
+        },
+        "description": "Webhook response"
+      },
+      "post": {
+        "responses": {},
+        "summary": "Webhook Trigger With Dynamic Parameters",
+        "operationId": "WebhookTriggerWithDynamicParameters",
+        "description": "Webhook Trigger With Dynamic Parameters",
+        "x-ms-trigger": "single",
+        "parameters": [
+          {
+            "name": "hookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Select the web hook you want to trriger from.",
+            "x-ms-summary": "Select web hook",
+            "x-ms-dynamic-values": {
+              "operationId": "GetAccessibleHookIDs",
+              "value-path": "hookId",
+              "value-title": "hookName"
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "callbackUrl": {
+                  "type": "string",
+                  "description": "callbackUrl",
+                  "x-ms-notification-url": true,
+                  "x-ms-visibility": "internal"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "key"
+    }
+  },
+  "security": [],
+  "tags": []
+}

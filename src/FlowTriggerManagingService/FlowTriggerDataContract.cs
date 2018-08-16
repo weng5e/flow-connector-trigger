@@ -4,13 +4,13 @@ using System.Text;
 
 namespace FlowTriggerManagingService
 {
-    public sealed class FlowTriggerDataContract
+    public sealed class FlowTriggerDataContract : FlowTriggerDataContractBase
     {
-        public string HookId { get; set; }
-
         public string CallBackEndpoint { get; set; }
 
         public List<string> Properties { get; set; }
+
+        public string ApiKey { get; set; } = "default-api-key";
 
         public FlowTriggerDataContract() { }
 

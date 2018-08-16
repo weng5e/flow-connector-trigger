@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleService.Controllers
 {
-    [Route("api/v1/[controller]/hookId/{hookId}")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class FlowConnectorController : ControllerBase
     {
@@ -19,17 +19,25 @@ namespace SampleService.Controllers
             _triggerService = triggerService;
         }
 
+        // GET /api/v1/flowconnector/hookIds
+        [HttpGet("hookIds")]
+        public IEnumerable<FlowTriggerDataContractBase> GetHookIds(string key)
+        {
+            var hooks = _triggerService.ListHooksByKey(key);
+            return hooks.Select(h => new FlowTriggerDataContractBase() { HookId = h.HookId, HookName = h.HookName });
+        }
+
         // GET /api/v1/flowconnector/hookId/{hookId}/Schema
-        [HttpGet("Schema")]
-        public async Task<object> GetSchemaAsync(string hookId)
+        [HttpGet("hookId/{hookId}/Schema")]
+        public async Task<object> GetSchemaAsync(string hookId, string key = null)
         {
             var properties = await _triggerService.GetPropertiesAsync(hookId);
             return GenerateJSONSchema(properties);
         }
 
         // POST /api/v1/flowconnector/hookId/{hookId}
-        [HttpPost]
-        public async Task<IActionResult> PostAsync(string hookId, [FromBody] ConnectorRegisterParameters parameters)
+        [HttpPost("hookId/{hookId}")]
+        public async Task<IActionResult> PostAsync(string hookId, [FromBody] ConnectorRegisterParameters parameters, string key = null)
         {
             if (!Uri.TryCreate(parameters.CallbackUrl, UriKind.Absolute, out var callback))
             {
@@ -45,8 +53,8 @@ namespace SampleService.Controllers
         }
 
         // Delete /api/v1/flowconnector/hookId/{hookId}
-        [HttpDelete]
-        public async Task DeleteAsync(string hookId)
+        [HttpDelete("hookId/{hookId}")]
+        public async Task DeleteAsync(string hookId, string key = null)
         {
             await _triggerService.DeleteCallbackAsync(hookId);
         }

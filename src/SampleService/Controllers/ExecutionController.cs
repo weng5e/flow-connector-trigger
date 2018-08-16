@@ -25,16 +25,23 @@ namespace SampleService.Controllers
 
         // GET api/execution/connectors
         [HttpGet("connectors")]
-        public object GetConnectors()
+        public IEnumerable<FlowTriggerDataContract> GetConnectors()
         {
             return _triggerService.ListAllTriggersAsync();
         }
 
+        // POST api/execution/key
+        [HttpPost("key")]
+        public void UpdateProperties(string hookId, [FromBody]string key)
+        {
+            _triggerService.UpdateApiKeyAsync(hookId, key);
+        }
+
         // POST api/execution/properties
         [HttpPost("properties")]
-        public async Task UpdatePropertiesAsync(string hookId, [FromBody]IEnumerable<string> properties)
+        public async Task UpdatePropertiesAsync(string hookId, [FromBody]IEnumerable<string> properties, string hookName = null)
         {
-            await _triggerService.UpdatePropertiesAsync(hookId, properties);
+            await _triggerService.UpdatePropertiesAsync(hookId, hookName, properties);
         }
 
         // POST api/execution/dynamic?hookId={hookId}
@@ -45,13 +52,13 @@ namespace SampleService.Controllers
             if (callback != null)
             {
                 var properties = await _triggerService.GetPropertiesAsync(hookId);
-                if(properties.Count()!= values.Count())
+                if (properties.Count() != values.Count())
                 {
                     return "Properties' count is not matching values' count.";
                 }
                 dynamic obj = new JObject();
                 int i = 0;
-                foreach(var prop in properties)
+                foreach (var prop in properties)
                 {
                     obj[prop] = values[i];
                     i++;
