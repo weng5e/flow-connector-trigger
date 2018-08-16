@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "5eBasicFixedParameter1",
+    "title": "5eDynamicParameter1",
     "description": "A test connector that can pass fixed parameters using web hook trigger.",
     "version": "1.0"
   },
@@ -17,17 +17,29 @@
       "x-ms-notification-content": {
         "schema": {
           "type": "object",
-          "properties": {
-            "parameter1": {
-              "type": "string",
-              "description": "parameter1"
+          "x-ms-dynamic-schema": {
+            "operationId": "GetListSchema",
+            "parameters": {
+              "listID": {
+                "parameter": "listID-dynamic"
+              }
             },
-            "parameter2": {
-              "type": "string",
-              "description": "parameter2"
-            }
+            "value-path": "items"
           }
         },
+        // "schema": {
+        //   "type": "object",
+        //   "properties": {
+        //     "parameter1": {
+        //       "type": "string",
+        //       "description": "parameter1"
+        //     },
+        //     "parameter2": {
+        //       "type": "string",
+        //       "description": "parameter2"
+        //     }
+        //   }
+        // },
         "description": "Webhook response"
       },
       "post": {

@@ -11,10 +11,5 @@ namespace SampleService.Controllers
         /// Call back url.
         /// </summary>
         public string CallbackUrl { get; set; }
-
-        /// <summary>
-        /// The ID of the hook.
-        /// </summary>
-        public string HookId { get; set; }
     }
 }
