@@ -10,8 +10,6 @@ namespace FlowTriggerManagingService
     /// </summary>
     public sealed class WebhookResponse
     {
-        public string ActionType { get; set; }
-
         public string Parameter1 { get; set; }
 
         public string Parameter2 { get; set; }

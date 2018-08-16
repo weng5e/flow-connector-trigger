@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "5eBasicFixedParameter",
+    "title": "5eBasicFixedParameter1",
     "description": "A test connector that can pass fixed parameters using web hook trigger.",
     "version": "1.0"
   },
@@ -13,7 +13,7 @@
   "consumes": [],
   "produces": [],
   "paths": {
-    "/tenant/{tenantId}/bot/{botId}/api/v1/FlowConnector": {
+    "/api/v1/FlowConnector": {
       "x-ms-notification-content": {
         "schema": {
           "type": "object",
@@ -37,18 +37,6 @@
         "description": "WebhookTriggerWithFixedPara",
         "x-ms-trigger": "single",
         "parameters": [
-          {
-            "name": "tenantId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "botId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",

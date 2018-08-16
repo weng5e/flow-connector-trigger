@@ -10,17 +10,15 @@ namespace FlowTriggerManagingService
     {
         private ConcurrentDictionary<string, FlowTriggerDataContract> _data = new ConcurrentDictionary<string, FlowTriggerDataContract>();
 
-        public Task DeleteTriggerAsync(string hookId, string tenantId, string botId)
+        public Task DeleteTriggerAsync(string hookId)
         {
-            var key = getKey(hookId, tenantId, botId);
-            _data.Remove(key, out var _);
+            _data.Remove(hookId, out var _);
             return Task.CompletedTask;
         }
 
-        public Task<Uri> GetCallbackAsync(string hookId, string tenantId, string botId)
+        public Task<Uri> GetCallbackAsync(string hookId)
         {
-            var key = getKey(hookId, tenantId, botId);
-            if (_data.TryGetValue(key, out var data))
+            if (_data.TryGetValue(hookId, out var data))
             {
                 var callback = new Uri(data.CallBackEndpoint);
                 return Task.FromResult(callback);
@@ -34,22 +32,17 @@ namespace FlowTriggerManagingService
 
         public IEnumerable<FlowTriggerDataContract> ListAllTriggerAsync()
         {
-            foreach(var kvp in _data)
+            foreach (var kvp in _data)
             {
                 yield return kvp.Value;
             }
         }
 
-        public Task UpdateTriggerAsync(string hookId, string tenantId, string botId, Uri callbackUri)
+        public Task UpdateTriggerAsync(string hookId, Uri callbackUri)
         {
-            var key = getKey(hookId, tenantId, botId);
-            _data.AddOrUpdate(key, new FlowTriggerDataContract(hookId, tenantId, botId, callbackUri), (_, __) => new FlowTriggerDataContract(hookId, tenantId, botId, callbackUri));
+            _data.AddOrUpdate(hookId, new FlowTriggerDataContract(hookId, callbackUri), (_, __) => new FlowTriggerDataContract(hookId, callbackUri));
             return Task.CompletedTask;
         }
 
-        private string getKey(string hookId, string tenantId, string botId)
-        {
-            return $"{hookId}|{tenantId}|{botId}";
-        }
     }
 }

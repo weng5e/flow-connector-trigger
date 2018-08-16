@@ -31,10 +31,10 @@ namespace SampleService.Controllers
 
         // POST api/execution
         [HttpPost()]
-        public async Task ExecAsync(string tenantId, string botId, string hookId, string para1, string para2)
+        public async Task ExecAsync(string hookId, string para1, string para2)
         {
-            var callback = await _triggerService.GetCallbackAsync(hookId, tenantId, botId);
-            var req = new WebhookResponse() { ActionType = "type1", Parameter1 = para1, Parameter2 = para2 };
+            var callback = await _triggerService.GetCallbackAsync(hookId);
+            var req = new WebhookResponse() { Parameter1 = para1, Parameter2 = para2 };
             var res = await _client.PostAsync(callback, new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json"));
         }
     }
